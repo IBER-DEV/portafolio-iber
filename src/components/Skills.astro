@@ -1,0 +1,244 @@
+---
+// Skills Component - Animated with Scroll Triggers
+---
+
+<section class="skills section" id="skills">
+  <div class="container">
+    <h2 class="section-title scroll-reveal">
+      <span class="gradient-text">Habilidades</span>
+    </h2>
+    
+    <div class="skills-grid">
+      <div class="skills-category scroll-reveal-left">
+        <h3 class="category-title">Habilidades Técnicas</h3>
+        <div class="skill-bars">
+          <div class="skill-bar">
+            <div class="skill-bar-label">
+              <span>Python</span>
+              <span>90%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--skill-level: 90%;"></div>
+            </div>
+          </div>
+          
+          <div class="skill-bar">
+            <div class="skill-bar-label">
+              <span>Java</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--skill-level: 85%;"></div>
+            </div>
+          </div>
+          
+          <div class="skill-bar">
+            <div class="skill-bar-label">
+              <span>React</span>
+              <span>88%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--skill-level: 88%;"></div>
+            </div>
+          </div>
+          
+          <div class="skill-bar">
+            <div class="skill-bar-label">
+              <span>Angular</span>
+              <span>85%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--skill-level: 85%;"></div>
+            </div>
+          </div>
+          
+          <div class="skill-bar">
+            <div class="skill-bar-label">
+              <span>SQL</span>
+              <span>87%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--skill-level: 87%;"></div>
+            </div>
+          </div>
+          
+          <div class="skill-bar">
+            <div class="skill-bar-label">
+              <span>Next.js</span>
+              <span>80%</span>
+            </div>
+            <div class="skill-bar-track">
+              <div class="skill-bar-fill" style="--skill-level: 80%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="skills-category scroll-reveal-right">
+        <h3 class="category-title">Habilidades Profesionales</h3>
+        <div class="skill-cards">
+          <div class="skill-card scroll-reveal-scale stagger-1">
+            <div class="skill-card-icon" aria-hidden="true"><i class="ti ti-chart-bar"></i></div>
+            <h4>Capacidad de análisis</h4>
+          </div>
+          
+          <div class="skill-card scroll-reveal-scale stagger-2">
+            <div class="skill-card-icon" aria-hidden="true"><i class="ti ti-folders"></i></div>
+            <h4>Gestión de proyectos</h4>
+          </div>
+          
+          <div class="skill-card scroll-reveal-scale stagger-3">
+            <div class="skill-card-icon" aria-hidden="true"><i class="ti ti-refresh-dot"></i></div>
+            <h4>Metodologías ágiles (Scrum)</h4>
+          </div>
+          
+          <div class="skill-card scroll-reveal-scale stagger-4">
+            <div class="skill-card-icon" aria-hidden="true"><i class="ti ti-bulb"></i></div>
+            <h4>Resolución de problemas</h4>
+          </div>
+          
+          <div class="skill-card scroll-reveal-scale stagger-5">
+            <div class="skill-card-icon" aria-hidden="true"><i class="ti ti-users-group"></i></div>
+            <h4>Trabajo en equipo</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    background: var(--color-bg-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(180deg, var(--color-bg-secondary), transparent);
+    pointer-events: none;
+  }
+  
+  .skills::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(180deg, transparent, var(--color-bg-secondary));
+    pointer-events: none;
+  }
+  
+  .skills-grid {
+    display: grid;
+    gap: var(--space-16);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .skills-category h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-8);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+  }
+  
+  .skill-bars {
+    display: grid;
+    gap: var(--space-6);
+  }
+  
+  .skill-bar-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-2);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+  
+  .skill-bar-label span:last-child {
+    color: var(--color-accent-cyan);
+    font-weight: 600;
+  }
+  
+  .skill-bar-track {
+    height: 12px;
+    background: rgba(19, 26, 32, 0.85);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .skill-bar-fill {
+    height: 100%;
+    background: var(--gradient-sunset);
+    border-radius: var(--radius-full);
+    width: 0;
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 15px rgba(201, 104, 69, 0.25);
+  }
+  
+  .skill-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-6);
+  }
+  
+  .skill-card {
+    background: rgba(19, 26, 32, 0.76);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 1px solid var(--color-border-soft);
+    transition: all 0.4s var(--ease-out-quart);
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    border-color: rgba(122, 195, 182, 0.42);
+    box-shadow: var(--shadow-lg), var(--shadow-neon-cyan);
+  }
+  
+  .skill-card-icon {
+    width: 56px;
+    height: 56px;
+    margin-inline: auto;
+    display: grid;
+    place-items: center;
+    color: var(--color-accent-cyan);
+    border-radius: 12px;
+    border: 1px solid rgba(122, 195, 182, 0.35);
+    background: rgba(122, 195, 182, 0.07);
+    margin-bottom: var(--space-4);
+  }
+
+  .skill-card-icon i {
+    font-size: 1.55rem;
+  }
+  
+  .skill-card h4 {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  @media (min-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+

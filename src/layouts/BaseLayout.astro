@@ -1,0 +1,402 @@
+---
+// Main Layout Component
+import '../styles/global.css';
+import '../styles/animations.css';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Portafolio profesional de Iber Masco - Ingeniero de Sistemas y Desarrollador Full Stack" } = Astro.props;
+const baseUrl = Astro.site ?? Astro.url;
+const canonicalURL = new URL(Astro.url.pathname, baseUrl).toString();
+const ogImage = new URL('/esta_persona_vestida_202604132039.png', baseUrl).toString();
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Iber Masco',
+  jobTitle: 'Ingeniero de Sistemas y Desarrollador Full Stack',
+  description,
+  url: canonicalURL,
+  image: ogImage,
+  email: 'mailto:ivermasco5@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Barranquilla',
+    addressCountry: 'CO'
+  },
+  sameAs: ['https://www.linkedin.com/in/ibermasco']
+};
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content={description}>
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="Iber Masco">
+    <meta name="theme-color" content="#0a0a0f">
+    <link rel="canonical" href={canonicalURL}>
+    <link rel="alternate" hreflang="es" href={canonicalURL}>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonicalURL}>
+    <meta property="og:site_name" content="Iber Masco Portfolio">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:image" content={ogImage}>
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={ogImage}>
+
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)}></script>
+
+    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.41.1/dist/tabler-icons.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>{title}</title>
+    
+    <style>
+      /* Inline critical CSS for above-the-fold content */
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <Navigation />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    
+    <!-- Global Scripts -->
+    <script>
+      (() => {
+        const gsapLib = (window as any).gsap;
+        const scrollTriggerLib = (window as any).ScrollTrigger;
+
+        if (!gsapLib || !scrollTriggerLib) {
+          console.warn('GSAP no se pudo cargar; se ejecuta fallback sin animaciones.');
+          return;
+        }
+
+        gsapLib.registerPlugin(scrollTriggerLib);
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const highlightNav = () => {
+          const scrollPos = window.scrollY + 110;
+
+          sections.forEach((section) => {
+            const sectionElement = section as HTMLElement;
+            const sectionTop = sectionElement.offsetTop;
+            const sectionHeight = sectionElement.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+              navLinks.forEach((link) => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                  link.classList.add('active');
+                }
+              });
+            }
+          });
+        };
+
+        window.addEventListener('scroll', highlightNav, { passive: true });
+        highlightNav();
+
+        // Smooth scroll for anchor links.
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener('click', (event) => {
+            const href = anchor.getAttribute('href');
+            if (!href) return;
+
+            const target = document.querySelector(href);
+            if (!target) return;
+
+            event.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+
+        if (!prefersReducedMotion) {
+          gsapLib.from('.hero-subtitle', {
+          y: -26,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+
+        gsapLib.from('.hero-title .name, .hero-title .name-highlight', {
+          y: 56,
+          opacity: 0,
+          duration: 1.05,
+          stagger: 0.12,
+          ease: 'power4.out'
+        });
+
+        gsapLib.from('.hero-description', {
+          y: 28,
+          opacity: 0,
+          duration: 0.85,
+          delay: 0.35,
+          ease: 'power3.out'
+        });
+
+        gsapLib.from('.hero-cta a', {
+          y: 24,
+          opacity: 0,
+          duration: 0.75,
+          stagger: 0.1,
+          delay: 0.45,
+          ease: 'power3.out'
+        });
+
+        gsapLib.from('.hero-stats .stat', {
+          y: 20,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.08,
+          delay: 0.65,
+          ease: 'power2.out'
+        });
+
+        gsapLib.to('.hero-video', {
+          scale: 1.18,
+          duration: 22,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
+
+        gsapLib.utils.toArray('.scroll-reveal').forEach((element: Element) => {
+          gsapLib.fromTo(
+            element,
+            { y: 42, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.95,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: element,
+                start: 'top 84%',
+                toggleActions: 'play none none reverse'
+              }
+            }
+          );
+        });
+
+        gsapLib.utils.toArray('.scroll-reveal-left').forEach((element: Element) => {
+          gsapLib.fromTo(
+            element,
+            { x: -56, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.9,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: element,
+                start: 'top 82%',
+                toggleActions: 'play none none reverse'
+              }
+            }
+          );
+        });
+
+        gsapLib.utils.toArray('.scroll-reveal-right').forEach((element: Element) => {
+          gsapLib.fromTo(
+            element,
+            { x: 56, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              duration: 0.9,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: element,
+                start: 'top 82%',
+                toggleActions: 'play none none reverse'
+              }
+            }
+          );
+        });
+
+        gsapLib.utils.toArray('.scroll-reveal-scale').forEach((element: Element) => {
+          gsapLib.fromTo(
+            element,
+            { scale: 0.9, opacity: 0 },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 0.75,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: element,
+                start: 'top 86%',
+                toggleActions: 'play none none reverse'
+              }
+            }
+          );
+        });
+
+        gsapLib.utils.toArray('.skill-bar-fill').forEach((bar: Element) => {
+          const barElement = bar as HTMLElement;
+          const targetWidth = barElement.style.getPropertyValue('--skill-level');
+          if (!targetWidth) return;
+
+          gsapLib.fromTo(
+            barElement,
+            { width: 0 },
+            {
+              width: targetWidth,
+              duration: 1.25,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: barElement,
+                start: 'top 88%',
+                toggleActions: 'play none none reverse'
+              }
+            }
+          );
+        });
+
+        gsapLib.from('.objective-item', {
+          x: -28,
+          opacity: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: '.objectives-list',
+            start: 'top 82%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+
+        gsapLib.fromTo(
+          '.education-grid',
+          { scale: 0.84, opacity: 0.58, y: 56, filter: 'blur(14px)' },
+          {
+            scale: 1,
+            opacity: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#education',
+              start: 'top 90%',
+              end: 'top 30%',
+              scrub: 1.2
+            }
+          }
+        );
+
+        gsapLib.fromTo(
+          '.education-media-overlay',
+          { opacity: 0.95 },
+          {
+            opacity: 0.62,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#education',
+              start: 'top 88%',
+              end: 'top 34%',
+              scrub: 1
+            }
+          }
+        );
+
+        gsapLib.fromTo(
+          '.education-media-image',
+          { scale: 1.08, yPercent: -4 },
+          {
+            scale: 1.02,
+            yPercent: 4,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.education-media',
+              start: 'top 88%',
+              end: 'bottom 12%',
+              scrub: 1.2
+            }
+          }
+        );
+
+        gsapLib.from('.education-media-content > *', {
+          y: 20,
+          opacity: 0,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.education-media',
+            start: 'top 82%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+
+        gsapLib.from('.contact-link', {
+          x: -30,
+          opacity: 0,
+          duration: 0.75,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.contact-links',
+            start: 'top 82%',
+            toggleActions: 'play none none reverse'
+          }
+        });
+
+        const profileBg = document.getElementById('profileBg');
+        if (profileBg) {
+          gsapLib.to(profileBg, {
+            yPercent: 14,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '#profile',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1
+            }
+          });
+        }
+
+        gsapLib.to('.particle', {
+          y: -16,
+          duration: 4,
+          yoyo: true,
+          repeat: -1,
+          stagger: 0.24,
+          ease: 'sine.inOut'
+        });
+        }
+      })();
+    </script>
+  </body>
+</html>

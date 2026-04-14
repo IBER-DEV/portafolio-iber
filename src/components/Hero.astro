@@ -1,0 +1,338 @@
+---
+// Hero Component - Cinematic introduction with ambient video
+---
+
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <!-- Video Background -->
+    <video 
+      autoplay 
+      muted 
+      loop 
+      playsinline
+      class="hero-video"
+    >
+      <source src="/Man_adjusts_suit_202604132039.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Gradient Overlays -->
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-bg-gradient"></div>
+    
+    <!-- Scanline Effect -->
+    <div class="scanline"></div>
+    
+    <!-- Floating Particles -->
+    <div class="particles">
+      <span class="particle" style="top: 15%; left: 10%; animation-delay: 0s;"></span>
+      <span class="particle" style="top: 55%; left: 25%; animation-delay: 2s; background: var(--color-accent-cyan);"></span>
+      <span class="particle" style="top: 35%; left: 70%; animation-delay: 4s; background: var(--color-accent-purple);"></span>
+      <span class="particle" style="top: 75%; left: 85%; animation-delay: 1s;"></span>
+      <span class="particle" style="top: 25%; left: 50%; animation-delay: 3s; background: var(--color-accent-cyan);"></span>
+      <span class="particle" style="top: 65%; left: 40%; animation-delay: 5s; background: var(--color-accent-purple);"></span>
+      <span class="particle" style="top: 45%; left: 15%; animation-delay: 1.5s;"></span>
+      <span class="particle" style="top: 85%; left: 60%; animation-delay: 3.5s; background: var(--color-accent-cyan);"></span>
+    </div>
+  </div>
+  
+  <div class="hero-content">
+    <div class="hero-subtitle">
+      <span class="tag">Ingeniero de Sistemas | Full Stack</span>
+    </div>
+    
+    <h1 class="hero-title">
+      <span class="name">IBER</span>
+      <span class="name-highlight gradient-text">MASCO</span>
+    </h1>
+    
+    <p class="hero-description">
+      Desarrollador <span class="highlight-cyan">Full Stack</span> especializado en crear 
+      soluciones tecnológicas robustas para retos reales de negocio.
+    </p>
+    
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">
+        <span>Ver Experiencia</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17l9.2-9.2M17 17V7H7"/>
+        </svg>
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <span>Contactar</span>
+      </a>
+    </div>
+    
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-number gradient-text">5+</span>
+        <span class="stat-label">Años en proyectos reales</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number gradient-text">2026</span>
+        <span class="stat-label">Ing. Sistemas</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-number gradient-text">📍</span>
+        <span class="stat-label">Barranquilla, CO</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="scroll-indicator">
+    <div class="mouse">
+      <div class="wheel"></div>
+    </div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Background Video */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: brightness(0.28) saturate(0.8) contrast(1.05);
+    transform: scale(1.1);
+    animation: slowZoom 40s ease-in-out infinite alternate;
+  }
+  
+  @keyframes slowZoom {
+    from { transform: scale(1.1); }
+    to { transform: scale(1.25); }
+  }
+  
+  /* Gradient Overlays */
+  .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 40%, rgba(201, 104, 69, 0.25) 0%, transparent 52%),
+      radial-gradient(ellipse at 80% 60%, rgba(122, 195, 182, 0.17) 0%, transparent 52%),
+      linear-gradient(180deg, 
+        rgba(15, 20, 24, 0.2) 0%, 
+        rgba(15, 20, 24, 0.55) 40%, 
+        rgba(15, 20, 24, 0.88) 100%);
+    z-index: 1;
+  }
+  
+  .hero-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, 
+      rgba(201, 104, 69, 0.09) 0%, 
+      rgba(122, 195, 182, 0.07) 55%, 
+      rgba(214, 178, 106, 0.04) 100%);
+    animation: pulse 8s ease-in-out infinite;
+    z-index: 1;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 980px;
+    padding: var(--space-20) var(--space-8);
+  }
+  
+  .hero-subtitle {
+    margin-bottom: var(--space-6);
+  }
+  
+  .tag {
+    display: inline-block;
+    padding: var(--space-2) var(--space-6);
+    background: rgba(12, 17, 21, 0.55);
+    border: 1px solid rgba(214, 178, 106, 0.3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    letter-spacing: 0.03em;
+    backdrop-filter: blur(8px);
+  }
+  
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--text-6xl), 12vw, var(--text-8xl));
+    line-height: 0.95;
+    letter-spacing: 0.03em;
+    margin-bottom: var(--space-8);
+    text-shadow: 0 4px 36px rgba(0, 0, 0, 0.72);
+    text-wrap: balance;
+  }
+  
+  .hero-title .name {
+    display: block;
+    color: #fff;
+  }
+  
+  .hero-title .name-highlight {
+    display: block;
+  }
+  
+  .hero-description {
+    font-size: clamp(var(--text-lg), 2.5vw, var(--text-2xl));
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-12);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  }
+  
+  .highlight-cyan {
+    color: var(--color-accent-cyan);
+    font-weight: 600;
+  }
+  
+  .hero-cta {
+    display: flex;
+    gap: var(--space-6);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--space-16);
+  }
+  
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+  }
+  
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: var(--text-4xl);
+  }
+  
+  .stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+  }
+  
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, transparent, rgba(214, 178, 106, 0.45), transparent);
+  }
+  
+  /* Scroll Indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: var(--space-8);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(236, 240, 241, 0.55);
+    font-size: var(--text-xs);
+    z-index: 3;
+  }
+  
+  .mouse {
+    width: 26px;
+    height: 40px;
+    border: 1px solid rgba(214, 178, 106, 0.45);
+    border-radius: var(--radius-full);
+    position: relative;
+  }
+  
+  .wheel {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--color-accent-orange);
+    border-radius: var(--radius-full);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  /* Particles */
+  .particles {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-accent-orange);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: float 10s ease-in-out infinite;
+  }
+  
+  /* Scanline Effect */
+  .scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(122, 195, 182, 0.2), transparent);
+    animation: scanline 6s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+  }
+  
+  /* Bottom gradient fade into next section */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, transparent, var(--color-bg-primary));
+    z-index: 2;
+    pointer-events: none;
+  }
+  
+  @media (max-width: 768px) {
+    .hero-stats {
+      gap: var(--space-6);
+    }
+    
+    .stat-divider {
+      display: none;
+    }
+    
+    .hero-cta {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>

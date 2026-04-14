@@ -1,0 +1,260 @@
+---
+// Profile Component - Cinematic with Parallax Image Background
+---
+
+<section class="profile section" id="profile">
+  <!-- Parallax Background Image -->
+  <div class="profile-bg parallax-bg" id="profileBg">
+    <img 
+      src="/esta_persona_vestida_202604132037.png" 
+      alt="" 
+      class="profile-bg-image"
+      loading="lazy"
+    />
+    <div class="profile-bg-overlay"></div>
+  </div>
+  
+  <div class="container profile-container">
+    <h2 class="section-title scroll-reveal">
+      <span class="gradient-text">Perfil Profesional</span>
+    </h2>
+    
+    <div class="profile-grid">
+      <div class="profile-main scroll-reveal">
+        <div class="profile-card">
+          <div class="profile-icon" aria-hidden="true"><i class="ti ti-user-circle"></i></div>
+          <h3>Sobre Mí</h3>
+          <p class="profile-text">
+            Ingeniero de sistemas egresado de la Universidad Simón Bolívar, con más de un año de 
+            experiencia en desarrollo de software. Me especializo en el desarrollo <strong>frontend y backend</strong>, 
+            utilizando tecnologías modernas para crear soluciones que generan impacto real.
+          </p>
+          <p class="profile-text">
+            He trabajado en la creación de soluciones tecnológicas personalizadas para pequeños negocios, 
+            optimizando procesos y mejorando la eficiencia operativa. Me apasiona la innovación y el 
+            desarrollo de proyectos con impacto real.
+          </p>
+        </div>
+      </div>
+      
+      <div class="profile-highlights">
+        <div class="highlight-card scroll-reveal stagger-1">
+          <div class="highlight-icon"><i class="ti ti-brand-python"></i></div>
+          <h4>Python</h4>
+          <p>Desarrollo backend y automatización</p>
+        </div>
+        
+        <div class="highlight-card scroll-reveal stagger-2">
+          <div class="highlight-icon"><i class="ti ti-coffee"></i></div>
+          <h4>Java</h4>
+          <p>Aplicaciones empresariales</p>
+        </div>
+        
+        <div class="highlight-card scroll-reveal stagger-3">
+          <div class="highlight-icon"><i class="ti ti-brand-react"></i></div>
+          <h4>React</h4>
+          <p>Interfaces modernas y dinámicas</p>
+        </div>
+        
+        <div class="highlight-card scroll-reveal stagger-4">
+          <div class="highlight-icon"><i class="ti ti-brand-angular"></i></div>
+          <h4>Angular</h4>
+          <p>Aplicaciones web robustas</p>
+        </div>
+        
+        <div class="highlight-card scroll-reveal stagger-5">
+          <div class="highlight-icon"><i class="ti ti-database"></i></div>
+          <h4>SQL</h4>
+          <p>Gestión de bases de datos</p>
+        </div>
+        
+        <div class="highlight-card scroll-reveal stagger-6">
+          <div class="highlight-icon"><i class="ti ti-repeat"></i></div>
+          <h4>Scrum</h4>
+          <p>Metodologías ágiles</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-bg-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Parallax Background */
+  .profile-bg {
+    position: absolute;
+    inset: -30%;
+    z-index: 0;
+    will-change: transform;
+  }
+  
+  .profile-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.2) saturate(1.3) blur(3px);
+  }
+  
+  .profile-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 50%, rgba(201, 104, 69, 0.24) 0%, transparent 52%),
+      radial-gradient(ellipse at 70% 50%, rgba(122, 195, 182, 0.14) 0%, transparent 52%),
+      linear-gradient(180deg, 
+        var(--color-bg-primary) 0%, 
+        rgba(15, 20, 24, 0.72) 30%, 
+        rgba(15, 20, 24, 0.72) 70%, 
+        var(--color-bg-primary) 100%);
+  }
+  
+  .profile-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: var(--space-24) var(--space-8);
+  }
+  
+  .profile-grid {
+    display: grid;
+    gap: var(--space-12);
+  }
+  
+  .profile-main {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .profile-card {
+    background: var(--color-surface-2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    padding: var(--space-12);
+    text-align: center;
+    border: 1px solid var(--color-border-soft);
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s var(--ease-out-quart);
+  }
+  
+  .profile-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-xl);
+  }
+  
+  .profile-icon {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto;
+    margin-bottom: var(--space-6);
+    border-radius: 999px;
+    border: 1px solid rgba(214, 178, 106, 0.45);
+    background: rgba(214, 178, 106, 0.08);
+    color: var(--color-accent-yellow);
+    font-size: 2rem;
+    display: grid;
+    place-items: center;
+  }
+  
+  .profile-card h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+  }
+  
+  .profile-text {
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: var(--space-4);
+    font-size: var(--text-lg);
+  }
+  
+  .profile-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-6);
+  }
+  
+  .highlight-card {
+    background: rgba(19, 26, 32, 0.76);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    border: 1px solid var(--color-border-soft);
+    transition: all 0.4s var(--ease-out-quart);
+  }
+  
+  .highlight-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    border-color: rgba(122, 195, 182, 0.38);
+    box-shadow: var(--shadow-lg), var(--shadow-neon-cyan);
+    background: rgba(122, 195, 182, 0.06);
+  }
+  
+  .highlight-icon {
+    width: 54px;
+    height: 54px;
+    margin: 0 auto;
+    margin-bottom: var(--space-4);
+    border-radius: 12px;
+    border: 1px solid rgba(122, 195, 182, 0.3);
+    color: var(--color-accent-cyan);
+    background: rgba(122, 195, 182, 0.08);
+    font-size: 1.45rem;
+    display: grid;
+    place-items: center;
+  }
+  
+  .highlight-card h4 {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+    color: var(--color-accent-cyan);
+  }
+  
+  .highlight-card p {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+  }
+  
+  /* Section transition gradient */
+  .profile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(180deg, var(--color-bg-primary), transparent);
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .profile::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(180deg, transparent, var(--color-bg-secondary));
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>
+

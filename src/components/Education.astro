@@ -1,0 +1,377 @@
+---
+// Education Component - With Scroll Animations
+---
+
+<section class="education section" id="education">
+  <div class="container">
+    <div class="education-grid">
+      <div class="education-panel scroll-reveal-left">
+        <div class="panel-head">
+          <div class="education-icon" aria-hidden="true"><i class="ti ti-school"></i></div>
+          <h3>Educación y Objetivo</h3>
+        </div>
+
+        <div class="panel-block">
+          <p class="block-kicker">Formación</p>
+          <h4>Universidad Simón Bolívar</h4>
+          <p class="degree">Ingeniería de Sistemas</p>
+          <p class="year">2021 - 2026</p>
+          <div class="education-meta">
+            <span><i class="ti ti-map-pin"></i> Barranquilla, CO</span>
+            <span><i class="ti ti-certificate"></i> Enfoque en desarrollo de software</span>
+          </div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <div class="panel-block">
+          <p class="block-kicker">Objetivo Profesional</p>
+          <p class="objectives-text">
+            Busco un entorno donde pueda crecer como full stack y aportar valor medible al producto.
+          </p>
+          <div class="objective-tags">
+            <span>Impacto en negocio</span>
+            <span>Mejora de procesos</span>
+            <span>Aprendizaje continuo</span>
+          </div>
+          <ul class="objectives-list">
+            <li class="objective-item stagger-1">
+              <span class="checkmark">✓</span>
+              Aplicar conocimientos técnicos en proyectos reales.
+            </li>
+            <li class="objective-item stagger-2">
+              <span class="checkmark">✓</span>
+              Optimizar procesos con soluciones tecnológicas.
+            </li>
+            <li class="objective-item stagger-3">
+              <span class="checkmark">✓</span>
+              Participar en productos innovadores con impacto.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="education-media scroll-reveal-scale">
+        <img
+          src="/esta_persona_vestida_202604132039.png"
+          alt="Iber Masco en entorno profesional"
+          class="education-media-image"
+          loading="lazy"
+        />
+        <div class="education-media-overlay"></div>
+        <div class="education-media-content">
+          <p class="media-kicker">Evolucion Profesional</p>
+          <h4>De la formacion academica al impacto real en producto</h4>
+          <div class="media-tags">
+            <span>2019 Inicio freelance</span>
+            <span>2026 Graduacion ing. sistemas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .education {
+    background: var(--color-bg-secondary);
+    min-height: 72vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .education-grid {
+    display: grid;
+    gap: var(--space-6);
+    max-width: 1220px;
+    margin: 0 auto;
+    transform-origin: center center;
+    will-change: transform, filter, opacity;
+  }
+
+  .education-panel {
+    background: var(--color-surface-2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    border: 1px solid var(--color-border-soft);
+    box-shadow: var(--shadow-lg);
+    transition: all 0.4s var(--ease-out-quart);
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .education-media {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    min-height: 460px;
+    border: 1px solid rgba(214, 178, 106, 0.22);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .education-media-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transform: scale(1.03);
+    filter: contrast(1.02) saturate(0.9) brightness(0.68);
+  }
+
+  .education-media-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 24% 22%, rgba(214, 178, 106, 0.16), transparent 45%),
+      linear-gradient(180deg, rgba(15, 20, 24, 0.18) 0%, rgba(15, 20, 24, 0.7) 100%);
+    transition: opacity 0.35s var(--ease-out-quart);
+  }
+
+  .education-media-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--space-3);
+  }
+
+  .media-kicker {
+    font-size: var(--text-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent-yellow);
+    font-family: var(--font-data);
+  }
+
+  .education-media h4 {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.35vw, 1.95rem);
+    color: var(--color-text-primary);
+    line-height: 1.18;
+    max-width: 22ch;
+  }
+
+  .media-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .media-tags span {
+    padding: 0.38rem 0.62rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(214, 178, 106, 0.26);
+    background: rgba(15, 20, 24, 0.46);
+    backdrop-filter: blur(8px);
+    color: var(--color-text-secondary);
+    font-size: var(--text-sm);
+  }
+  
+  .education-panel:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .panel-head {
+    text-align: center;
+  }
+
+  .panel-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+  }
+
+  .panel-block {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .block-kicker {
+    font-size: var(--text-xs);
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--color-accent-yellow);
+    font-family: var(--font-data);
+  }
+  
+  .education-icon,
+  .objectives-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    border: 1px solid rgba(214, 178, 106, 0.4);
+    background: rgba(214, 178, 106, 0.08);
+    color: var(--color-accent-yellow);
+    display: grid;
+    place-items: center;
+    margin-inline: auto;
+    margin-bottom: var(--space-4);
+  }
+
+  .education-icon i,
+  .objectives-icon i {
+    font-size: 1.5rem;
+  }
+  
+  .education-panel h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.95rem, 2.5vw, 2.3rem);
+    text-align: center;
+    margin-bottom: var(--space-2);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+  }
+
+  .education-meta {
+    margin-top: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .education-focus {
+    margin-top: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .education-focus li {
+    color: var(--color-text-secondary);
+    font-size: 0.92rem;
+    line-height: 1.45;
+    padding: 0.46rem 0.62rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border-soft);
+    background: rgba(19, 26, 32, 0.58);
+  }
+
+  .education-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text-tertiary);
+    font-size: var(--text-sm);
+    justify-content: center;
+  }
+  
+  .education-item h4 {
+    font-size: clamp(1.45rem, 1.8vw, 1.8rem);
+    font-weight: 700;
+    margin-bottom: var(--space-2);
+    color: var(--color-accent-cyan);
+  }
+  
+  .degree {
+    font-size: 1.16rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+  }
+  
+  .year {
+    font-size: 1.08rem;
+    color: var(--color-accent-pink);
+    font-weight: 500;
+  }
+  
+  .objectives-text {
+    text-align: left;
+    font-size: 1.04rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .objective-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .objective-tags span {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-soft);
+    border-radius: 999px;
+    padding: 0.28rem 0.56rem;
+    background: rgba(19, 26, 32, 0.65);
+  }
+  
+  .objectives-list {
+    display: grid;
+    gap: var(--space-2);
+    max-width: none;
+    margin: 0 auto;
+  }
+  
+  .objective-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: 0.98rem;
+    color: var(--color-text-secondary);
+    padding: 0.55rem 0.75rem;
+    background: rgba(19, 26, 32, 0.76);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-soft);
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.3s ease,
+                border-color 0.3s ease;
+  }
+  
+  .objective-item:hover {
+    transform: translateX(8px);
+    background: rgba(201, 104, 69, 0.08);
+    border-color: rgba(201, 104, 69, 0.35);
+  }
+  
+  .checkmark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: var(--gradient-sunset);
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.72rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 15px rgba(201, 104, 69, 0.25);
+  }
+  
+  @media (min-width: 768px) {
+    .education-grid {
+      grid-template-columns: repeat(2, 1fr);
+      align-items: start;
+    }
+
+    .education-media {
+      min-height: 520px;
+    }
+  }
+
+  @media (min-width: 1120px) {
+    .education-grid {
+      grid-template-columns: minmax(400px, 0.96fr) minmax(560px, 1.18fr);
+      gap: var(--space-6);
+      align-items: start;
+    }
+
+    .education-media {
+      min-height: 600px;
+    }
+  }
+</style>
+
