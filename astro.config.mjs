@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://ibermasco.dev',
+  site: 'https://iber-dev.github.io',
+  base: '/portafolio-iber',
 });
