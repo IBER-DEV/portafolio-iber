@@ -1,0 +1,73 @@
+---
+import FadeIn from './FadeIn.astro';
+import Magnet from './Magnet.astro';
+import ContactButton from './ContactButton.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const links = [
+  { label: 'Sobre mí', href: '#about' },
+  { label: 'Servicios', href: '#services' },
+  { label: 'Proyectos', href: '#projects' },
+  { label: 'Contacto', href: '#contact' },
+];
+---
+
+<section id="top" class="relative flex h-screen flex-col" style="overflow-x: clip;">
+  <FadeIn as="nav" delay={0} y={-20} class="relative z-20 flex justify-between px-6 pt-6 md:px-10 md:pt-8" aria-label="Principal">
+    {
+      links.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm font-medium uppercase tracking-wider text-[#D7E2EA] transition-opacity duration-200 hover:opacity-70 md:text-lg lg:text-[1.4rem]"
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </FadeIn>
+
+  <div class="overflow-hidden">
+    <FadeIn
+      as="h1"
+      delay={0.15}
+      y={40}
+      class="hero-heading mt-6 w-full whitespace-nowrap text-center text-[12.6vw] font-black uppercase leading-none tracking-tight sm:mt-4 sm:text-[13vw] md:-mt-5 md:text-[13.4vw] lg:text-[13.6vw]"
+    >
+      Hola, soy iber
+    </FadeIn>
+  </div>
+
+  <div class="relative z-20 mt-auto flex items-end justify-between px-6 pb-7 sm:pb-8 md:px-10 md:pb-10">
+    <FadeIn
+      as="p"
+      delay={0.35}
+      y={20}
+      class="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]"
+      style="font-size: clamp(0.75rem, 1.4vw, 1.5rem);"
+    >
+      un ingeniero full stack que construye soluciones robustas y memorables
+    </FadeIn>
+    <FadeIn delay={0.5} y={20}>
+      <ContactButton />
+    </FadeIn>
+  </div>
+
+  <FadeIn
+    delay={0.6}
+    y={30}
+    class="absolute left-1/2 top-1/2 z-10 w-[min(280px,52vh)] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[min(360px,58vh)] sm:translate-y-0 md:w-[min(440px,58vh)] lg:w-[min(520px,58vh)]"
+  >
+    <Magnet padding={150} strength={3} activeTransition="transform 0.3s ease-out" inactiveTransition="transform 0.6s ease-in-out">
+      <img
+        src={`${base}images/portrait.webp`}
+        alt="Retrato de Iber Masco"
+        width="1040"
+        height="1467"
+        fetchpriority="high"
+        class="block h-auto w-full select-none [mask-image:linear-gradient(to_bottom,black_78%,transparent)] sm:[mask-image:none]"
+        draggable="false"
+      />
+    </Magnet>
+  </FadeIn>
+</section>

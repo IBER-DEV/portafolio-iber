@@ -1,0 +1,58 @@
+---
+import FadeIn from './FadeIn.astro';
+import ContactButton from './ContactButton.astro';
+
+const year = new Date().getFullYear();
+
+const socials = [
+  { label: 'Email', href: 'mailto:ivermasco5@gmail.com' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ibermasco' },
+  { label: 'GitHub', href: 'https://github.com/IBER-DEV' },
+];
+---
+
+<footer id="contact" class="bg-[#0C0C0C] px-5 pb-10 pt-24 sm:px-8 md:px-10 md:pt-32">
+  <div class="flex flex-col items-center gap-10 text-center sm:gap-12">
+    <FadeIn
+      as="h2"
+      delay={0}
+      y={40}
+      class="hero-heading font-black uppercase leading-none tracking-tight"
+      style="font-size: clamp(3rem, 12vw, 160px);"
+    >
+      Hablemos
+    </FadeIn>
+    <FadeIn
+      as="p"
+      delay={0.15}
+      y={20}
+      class="max-w-[520px] font-light leading-relaxed text-[#D7E2EA]"
+      style="font-size: clamp(1rem, 2vw, 1.35rem);"
+    >
+      ¿Tienes un proyecto en mente o una vacante? Escríbeme y lo construimos juntos.
+    </FadeIn>
+    <FadeIn delay={0.3} y={20}>
+      <ContactButton />
+    </FadeIn>
+  </div>
+
+  <div
+    class="mt-20 flex flex-col items-center justify-between gap-4 border-t border-[#D7E2EA]/15 pt-8 text-xs uppercase tracking-wider text-[#D7E2EA]/70 sm:flex-row sm:text-sm md:mt-28"
+  >
+    <span>© {year} Iber Masco · Barranquilla, CO</span>
+    <nav class="flex gap-6" aria-label="Redes">
+      {
+        socials.map((social) => (
+          <a
+            href={social.href}
+            target={social.href.startsWith('http') ? '_blank' : undefined}
+            rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            class="transition-opacity duration-200 hover:opacity-70"
+          >
+            {social.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</footer>

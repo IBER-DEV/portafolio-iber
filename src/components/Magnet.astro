@@ -1,0 +1,72 @@
+---
+interface Props {
+  padding?: number;
+  strength?: number;
+  activeTransition?: string;
+  inactiveTransition?: string;
+  class?: string;
+}
+
+const {
+  padding = 100,
+  strength = 2,
+  activeTransition = 'transform 0.3s ease-out',
+  inactiveTransition = 'transform 0.5s ease-in-out',
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class:list={['relative', className]}
+  data-magnet
+  data-padding={padding}
+  data-strength={strength}
+  data-active-transition={activeTransition}
+  data-inactive-transition={inactiveTransition}
+>
+  <div data-magnet-inner style={`transform:translate3d(0,0,0);transition:${inactiveTransition};will-change:transform;`}>
+    <slot />
+  </div>
+</div>
+
+<script>
+  const magnets = document.querySelectorAll<HTMLElement>('[data-magnet]');
+  const canHover = window.matchMedia('(hover: hover)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (magnets.length && canHover && !reduceMotion) {
+    const items = Array.from(magnets).map((el) => ({
+      el,
+      inner: el.querySelector<HTMLElement>('[data-magnet-inner]')!,
+      padding: Number(el.dataset.padding),
+      strength: Number(el.dataset.strength),
+      activeTransition: el.dataset.activeTransition!,
+      inactiveTransition: el.dataset.inactiveTransition!,
+      active: false,
+    }));
+
+    window.addEventListener(
+      'mousemove',
+      (event) => {
+        for (const item of items) {
+          const { left, top, width, height } = item.el.getBoundingClientRect();
+          const distX = event.clientX - (left + width / 2);
+          const distY = event.clientY - (top + height / 2);
+          const inRange =
+            Math.abs(distX) < width / 2 + item.padding && Math.abs(distY) < height / 2 + item.padding;
+
+          if (inRange) {
+            item.active = true;
+            item.inner.style.transition = item.activeTransition;
+            item.inner.style.transform = `translate3d(${distX / item.strength}px, ${distY / item.strength}px, 0)`;
+          } else if (item.active) {
+            item.active = false;
+            item.inner.style.transition = item.inactiveTransition;
+            item.inner.style.transform = 'translate3d(0, 0, 0)';
+          }
+        }
+      },
+      { passive: true },
+    );
+  }
+</script>

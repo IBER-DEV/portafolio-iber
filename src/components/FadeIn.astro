@@ -1,0 +1,59 @@
+---
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  delay?: number;
+  duration?: number;
+  x?: number;
+  y?: number;
+  class?: string;
+  style?: string;
+  [key: string]: unknown;
+}
+
+const { as: Tag = 'div', delay = 0, duration = 0.7, x = 0, y = 30, class: className, style = '', ...rest } = Astro.props;
+---
+
+<Tag
+  class={className}
+  data-fade
+  data-delay={delay}
+  data-duration={duration}
+  data-x={x}
+  data-y={y}
+  style={`opacity:0;transform:translate(${x}px, ${y}px);${style}`}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<script>
+  import { inView } from 'motion';
+  import { animate } from 'motion/mini';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-fade]').forEach((el) => {
+    const { delay = '0', duration = '0.7', x = '0', y = '30' } = el.dataset;
+
+    inView(
+      el,
+      () => {
+        animate(
+          el,
+          {
+            opacity: [0, 1],
+            transform: [`translate(${x}px, ${y}px)`, 'translate(0px, 0px)'],
+          },
+          {
+            delay: reduceMotion ? 0 : Number(delay),
+            duration: reduceMotion ? 0 : Number(duration),
+            ease: [0.25, 0.1, 0.25, 1],
+          },
+        );
+      },
+      { margin: '50px', amount: 0 },
+    );
+  });
+</script>

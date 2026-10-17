@@ -1,19 +1,18 @@
 ---
-// Main Portfolio Page
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import Profile from '../components/Profile.astro';
-import Experience from '../components/Experience.astro';
-import Skills from '../components/Skills.astro';
-import Education from '../components/Education.astro';
-import Contact from '../components/Contact.astro';
+import HeroSection from '../components/HeroSection.astro';
+import MarqueeSection from '../components/MarqueeSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import ContactFooter from '../components/ContactFooter.astro';
 ---
 
-<BaseLayout title="Iber Masco | Ingeniero de Sistemas & Desarrollador Full Stack">
-  <Hero />
-  <Profile />
-  <Experience />
-  <Skills />
-  <Education />
-  <Contact />
+<BaseLayout title="Iber — Desarrollador Full Stack">
+  <HeroSection />
+  <MarqueeSection />
+  <AboutSection />
+  <ServicesSection />
+  <ProjectsSection />
+  <ContactFooter />
 </BaseLayout>

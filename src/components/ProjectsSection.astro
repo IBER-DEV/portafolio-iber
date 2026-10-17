@@ -1,0 +1,149 @@
+---
+import FadeIn from './FadeIn.astro';
+import LiveProjectButton from './LiveProjectButton.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const projects = [
+  {
+    name: 'GestiónPro',
+    category: 'Plataforma empresarial',
+    url: 'https://gesti-n-de-hallazgos.vercel.app',
+    alt: 'Gestión de hallazgos, causa raíz y acciones correctivas',
+    images: ['images/project-1-detail.webp', 'images/project-1-phone.webp', 'images/project-1-laptop.webp'],
+  },
+  {
+    name: 'CashFlow Personal',
+    category: 'Finanzas personales',
+    url: 'https://cashflow-personal-five.vercel.app',
+    alt: 'App que calcula cuánto puedes gastar hoy hasta la próxima quincena',
+    images: ['images/project-2-detail.webp', 'images/project-2-phone.webp', 'images/project-2-laptop.webp'],
+  },
+  {
+    name: 'Future Pro',
+    category: 'Fitness · Recomposición corporal',
+    url: 'https://future-pro-rosy.vercel.app',
+    alt: 'Plataforma de seguimiento de planes y progreso físico',
+    images: ['images/project-3-detail.webp', 'images/project-3-phone.webp', 'images/project-3-laptop.webp'],
+  },
+];
+
+const total = projects.length;
+const imageRadius = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
+---
+
+<section
+  id="projects"
+  class="relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 pt-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:pt-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pt-32"
+>
+  <FadeIn
+    as="h2"
+    delay={0}
+    y={40}
+    class="hero-heading mb-12 text-center font-black uppercase leading-none tracking-tight sm:mb-16 md:mb-20"
+    style="font-size: clamp(3rem, 12vw, 160px);"
+  >
+    Proyectos
+  </FadeIn>
+
+  <div class="mx-auto max-w-6xl" data-card-stack>
+    {
+      projects.map((project, i) => (
+        <div class="sticky top-24 flex h-[85vh] items-start justify-center md:top-32">
+          <article
+            class="relative w-full origin-top rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
+            style={`top: ${i * 28}px; will-change: transform;`}
+            data-stack-card
+            data-target-scale={1 - (total - 1 - i) * 0.03}
+          >
+            <div class="flex flex-wrap items-center justify-between gap-4 px-2 pb-4 sm:gap-6 sm:px-4 sm:pb-6 md:pb-8">
+              <div class="flex items-center gap-4 sm:gap-6 md:gap-8">
+                <span class="hero-heading font-black leading-none" style="font-size: clamp(3rem, 10vw, 140px);">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div class="flex flex-col gap-1 sm:gap-2">
+                  <span class="text-xs font-light uppercase tracking-widest text-[#D7E2EA]/60 sm:text-sm md:text-base">
+                    {project.category}
+                  </span>
+                  <h3
+                    class="font-medium uppercase leading-tight text-[#D7E2EA]"
+                    style="font-size: clamp(1rem, 2.2vw, 2.1rem);"
+                  >
+                    {project.name}
+                  </h3>
+                </div>
+              </div>
+              <LiveProjectButton href={project.url} />
+            </div>
+
+            <div class="flex gap-3 sm:gap-4">
+              <div class="flex w-[40%] flex-col gap-3 sm:gap-4">
+                <img
+                  src={`${base}${project.images[0]}`}
+                  alt={`${project.name}: detalle de la interfaz`}
+                  loading="lazy"
+                  decoding="async"
+                  class={`w-full object-cover ${imageRadius}`}
+                  style="height: clamp(130px, 16vw, 230px);"
+                />
+                <img
+                  src={`${base}${project.images[1]}`}
+                  alt={`${project.name}: versión móvil`}
+                  loading="lazy"
+                  decoding="async"
+                  class={`w-full object-cover ${imageRadius}`}
+                  style="height: clamp(160px, 22vw, 340px);"
+                />
+              </div>
+              <div class="w-[60%]">
+                <img
+                  src={`${base}${project.images[2]}`}
+                  alt={project.alt}
+                  loading="lazy"
+                  decoding="async"
+                  class={`h-full w-full object-cover ${imageRadius}`}
+                />
+              </div>
+            </div>
+          </article>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const stack = document.querySelector<HTMLElement>('[data-card-stack]');
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-stack-card]'));
+
+  if (stack && cards.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let ticking = false;
+
+    // useScroll({ target: stack, offset: ['start start', 'end end'] }) +
+    // useTransform(progress, [index / total, 1], [1, targetScale])
+    const update = () => {
+      ticking = false;
+      const rect = stack.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      const progress = scrollable > 0 ? Math.min(Math.max(-rect.top / scrollable, 0), 1) : 0;
+
+      cards.forEach((card, i) => {
+        const targetScale = Number(card.dataset.targetScale);
+        const start = i / cards.length;
+        const t = Math.min(Math.max((progress - start) / (1 - start), 0), 1);
+        card.style.transform = `scale(${1 + (targetScale - 1) * t})`;
+      });
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+</script>

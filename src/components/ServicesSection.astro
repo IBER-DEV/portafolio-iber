@@ -1,0 +1,68 @@
+---
+import FadeIn from './FadeIn.astro';
+
+const services = [
+  {
+    name: 'Desarrollo Frontend',
+    description:
+      'Interfaces web modernas, rápidas y accesibles con React, Angular y Next.js, cuidando cada detalle de la experiencia de usuario.',
+  },
+  {
+    name: 'Desarrollo Backend',
+    description:
+      'APIs y servicios robustos en Python y Java, con arquitecturas cliente/servidor pensadas para escalar y mantenerse en el tiempo.',
+  },
+  {
+    name: 'Bases de Datos',
+    description:
+      'Diseño, modelado y optimización de bases de datos SQL para que la información de tu negocio sea confiable y rápida de consultar.',
+  },
+  {
+    name: 'Integración de Sistemas',
+    description:
+      'Conexión de plataformas, dispositivos y servicios de terceros para que tus herramientas trabajen juntas sin fricción.',
+  },
+  {
+    name: 'Automatización',
+    description:
+      'Software a la medida que elimina tareas manuales y optimiza la operación de pequeños negocios y equipos empresariales.',
+  },
+];
+---
+
+<section
+  id="services"
+  class="rounded-t-[40px] bg-white px-5 py-20 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32"
+>
+  <h2
+    class="mb-16 text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C] sm:mb-20 md:mb-28"
+    style="font-size: clamp(3rem, 12vw, 160px);"
+  >
+    Servicios
+  </h2>
+
+  <ul class="mx-auto max-w-5xl">
+    {
+      services.map((service, i) => (
+        <FadeIn
+          as="li"
+          delay={i * 0.1}
+          class="flex items-start gap-6 py-8 sm:gap-10 sm:py-10 md:gap-14 md:py-12"
+          style={`border-top: 1px solid rgba(12, 12, 12, 0.15);${i === services.length - 1 ? ' border-bottom: 1px solid rgba(12, 12, 12, 0.15);' : ''}`}
+        >
+          <span class="shrink-0 font-black leading-none text-[#0C0C0C]" style="font-size: clamp(3rem, 10vw, 140px);">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+          <div class="flex flex-col gap-2 pt-1 text-[#0C0C0C] sm:gap-3 md:pt-3">
+            <h3 class="font-medium uppercase leading-tight" style="font-size: clamp(1rem, 2.2vw, 2.1rem);">
+              {service.name}
+            </h3>
+            <p class="max-w-2xl font-light leading-relaxed opacity-60" style="font-size: clamp(0.85rem, 1.6vw, 1.25rem);">
+              {service.description}
+            </p>
+          </div>
+        </FadeIn>
+      ))
+    }
+  </ul>
+</section>

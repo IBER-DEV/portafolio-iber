@@ -1,0 +1,70 @@
+---
+interface Props {
+  text: string;
+  class?: string;
+  style?: string;
+}
+
+const { text, class: className, style } = Astro.props;
+const words = text.split(' ');
+---
+
+<p class={className} style={style} data-animated-text aria-label={text}>
+  {
+    words.map((word, wordIndex) => (
+      <>
+        <span class="inline-block whitespace-nowrap" aria-hidden="true">
+          {Array.from(word).map((char) => (
+            <span class="relative inline-block">
+              <span class="invisible">{char}</span>
+              <span class="absolute left-0 top-0" style="opacity:0.2" data-char>
+                {char}
+              </span>
+            </span>
+          ))}
+        </span>
+        {wordIndex < words.length - 1 && ' '}
+      </>
+    ))
+  }
+</p>
+
+<script>
+  // Scroll offset ['start 0.8', 'end 0.2']: progress goes from 0 when the
+  // paragraph top reaches 80% of the viewport to 1 when its bottom reaches 20%.
+  const paragraphs = Array.from(document.querySelectorAll<HTMLElement>('[data-animated-text]')).map((el) => ({
+    el,
+    chars: Array.from(el.querySelectorAll<HTMLElement>('[data-char]')),
+  }));
+
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const vh = window.innerHeight;
+
+    for (const { el, chars } of paragraphs) {
+      const rect = el.getBoundingClientRect();
+      const progress = Math.min(Math.max((vh * 0.8 - rect.top) / (rect.height + vh * 0.6), 0), 1);
+      const total = chars.length;
+
+      chars.forEach((char, i) => {
+        const local = Math.min(Math.max((progress - i / total) * total, 0), 1);
+        char.style.opacity = String(0.2 + local * 0.8);
+      });
+    }
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+  };
+
+  if (paragraphs.length) {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+</script>
