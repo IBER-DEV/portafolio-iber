@@ -41,7 +41,24 @@ const decorations = [
 ];
 
 const aboutText =
-  'Con más de cinco años construyendo software, me enfoco en desarrollo web, sistemas empresariales y experiencia de usuario. Disfruto trabajar con negocios y equipos que quieren optimizar sus procesos y destacar con tecnología bien hecha. ¡Construyamos algo increíble juntos!';
+  'Ingeniero de sistemas con dos años de experiencia profesional llevando productos a producción: plataformas SaaS multi-tenant, PWA, apps móviles y servidores MCP. Trabajo a diario con agentes de IA para diseñar, construir y desplegar más rápido sin sacrificar calidad. ¡Construyamos algo increíble juntos!';
+
+const stack = [
+  'TypeScript',
+  'React',
+  'TanStack',
+  'Angular',
+  'Python',
+  'Django REST',
+  'Java',
+  'PostgreSQL',
+  'Supabase',
+  'Docker',
+  'Cloudflare',
+  'Capacitor',
+  'MCP',
+  'Claude Code',
+];
 ---
 
 <section id="about" class="relative flex min-h-screen flex-col items-center justify-center px-5 py-20 sm:px-8 md:px-10">
@@ -69,6 +86,15 @@ const aboutText =
         class="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
         style="font-size: clamp(1rem, 2vw, 1.35rem);"
       />
+      <FadeIn as="ul" delay={0.1} y={20} class="flex max-w-[640px] flex-wrap justify-center gap-2" aria-label="Tecnologías">
+        {
+          stack.map((tech) => (
+            <li class="rounded-full border border-[#D7E2EA]/25 px-3 py-1 text-xs uppercase tracking-wider text-[#D7E2EA]/80 sm:text-sm">
+              {tech}
+            </li>
+          ))
+        }
+      </FadeIn>
     </div>
     <ContactButton />
   </div>

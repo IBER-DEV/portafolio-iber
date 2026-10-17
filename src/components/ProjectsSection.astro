@@ -6,25 +6,54 @@ const base = import.meta.env.BASE_URL;
 
 const projects = [
   {
-    name: 'GestiónPro',
-    category: 'Plataforma empresarial',
-    url: 'https://gesti-n-de-hallazgos.vercel.app',
-    alt: 'Gestión de hallazgos, causa raíz y acciones correctivas',
-    images: ['images/project-1-detail.webp', 'images/project-1-phone.webp', 'images/project-1-laptop.webp'],
+    name: 'Bocado',
+    category: 'PWA de nutrición · IA',
+    description:
+      'Plan de comidas, contador de calorías y ayuno con los 773 alimentos de la tabla colombiana (TCAC). Funciona offline y reconoce comidas por foto con IA.',
+    stack: ['React', 'PWA', 'Django REST', 'PostgreSQL', 'OpenRouter'],
+    url: 'https://bocado.iber-mascodev.workers.dev',
+    cta: 'Ver en vivo',
+    images: ['projects/bocado-detail', 'projects/bocado-phone', 'projects/bocado-hero'],
   },
   {
-    name: 'CashFlow Personal',
-    category: 'Finanzas personales',
-    url: 'https://cashflow-personal-five.vercel.app',
-    alt: 'App que calcula cuánto puedes gastar hoy hasta la próxima quincena',
-    images: ['images/project-2-detail.webp', 'images/project-2-phone.webp', 'images/project-2-laptop.webp'],
+    name: 'Nexo',
+    category: 'SaaS open source · Equipos de TI',
+    description:
+      'Backlog, planeación y Kanban con flujos configurables por organización. Multi-tenant, sincroniza con Google Sheets y se conecta a Claude vía MCP.',
+    stack: ['React 19', 'TanStack Start', 'Django REST', 'PostgreSQL', 'MCP'],
+    url: 'https://nexoengine.tech',
+    cta: 'Ver en vivo',
+    images: ['projects/nexo-detail', 'projects/nexo-phone', 'projects/nexo-laptop'],
   },
   {
-    name: 'Future Pro',
-    category: 'Fitness · Recomposición corporal',
-    url: 'https://future-pro-rosy.vercel.app',
-    alt: 'Plataforma de seguimiento de planes y progreso físico',
-    images: ['images/project-3-detail.webp', 'images/project-3-phone.webp', 'images/project-3-laptop.webp'],
+    name: 'Salda',
+    category: 'Fintech · Asesor de deudas con IA',
+    description:
+      'Asesor financiero con tool-calling sobre un motor de cálculo propio: audita deudas, simula abonos y revela la tasa real de una cotización desde una foto o PDF.',
+    stack: ['React 19', 'Supabase', 'Capacitor', 'Tool-calling'],
+    url: 'https://saldas.lat',
+    cta: 'Ver en vivo',
+    images: ['projects/salda-detail', 'projects/salda-phone', 'projects/salda-laptop'],
+  },
+  {
+    name: 'Turnio',
+    category: 'SaaS multi-tenant · Barberías y salones',
+    description:
+      'Agenda por empleado, asignación automática de turnos y permisos granulares. API con contrato OpenAPI y apps web y móvil con Capacitor.',
+    stack: ['Django REST', 'React', 'Capacitor', 'OpenAPI', 'Docker'],
+    url: 'https://github.com/IBER-DEV/Turnio',
+    cta: 'Ver código',
+    images: ['projects/turnio-detail', 'projects/turnio-phone', 'projects/turnio-laptop'],
+  },
+  {
+    name: 'ModaPOS',
+    category: 'Retail · POS e inventario',
+    description:
+      'Punto de venta multi-tenant para moda y calzado: inventario por talla y color, caja, devoluciones y sincronización offline, respaldado por 172 pruebas automatizadas.',
+    stack: ['Django 5.2', 'PostgreSQL', 'Redis', 'React'],
+    url: 'https://github.com/IBER-DEV/POS-SYSTEM',
+    cta: 'Ver código',
+    images: ['projects/modapos-detail', 'projects/modapos-counter', 'projects/modapos-tablet'],
   },
 ];
 
@@ -56,12 +85,12 @@ const imageRadius = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
             data-stack-card
             data-target-scale={1 - (total - 1 - i) * 0.03}
           >
-            <div class="flex flex-wrap items-center justify-between gap-4 px-2 pb-4 sm:gap-6 sm:px-4 sm:pb-6 md:pb-8">
-              <div class="flex items-center gap-4 sm:gap-6 md:gap-8">
+            <div class="flex flex-wrap items-start justify-between gap-4 px-2 pb-4 sm:gap-6 sm:px-4 sm:pb-6 md:pb-8">
+              <div class="flex w-full min-w-0 items-start gap-4 sm:w-auto sm:flex-1 sm:gap-6 md:gap-8">
                 <span class="hero-heading font-black leading-none" style="font-size: clamp(3rem, 10vw, 140px);">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <div class="flex flex-col gap-1 sm:gap-2">
+                <div class="flex min-w-0 flex-col gap-1 sm:gap-2 md:pt-2">
                   <span class="text-xs font-light uppercase tracking-widest text-[#D7E2EA]/60 sm:text-sm md:text-base">
                     {project.category}
                   </span>
@@ -71,34 +100,44 @@ const imageRadius = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
                   >
                     {project.name}
                   </h3>
+                  <p class="max-w-2xl font-light leading-relaxed text-[#D7E2EA]/70" style="font-size: clamp(0.85rem, 1.2vw, 1.05rem);">
+                    {project.description}
+                  </p>
+                  <ul class="mt-1 hidden flex-wrap gap-2 sm:flex">
+                    {project.stack.map((tech) => (
+                      <li class="rounded-full border border-[#D7E2EA]/25 px-3 py-0.5 text-xs uppercase tracking-wider text-[#D7E2EA]/70">
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-              <LiveProjectButton href={project.url} />
+              <LiveProjectButton href={project.url} label={project.cta} />
             </div>
 
             <div class="flex gap-3 sm:gap-4">
               <div class="flex w-[40%] flex-col gap-3 sm:gap-4">
                 <img
-                  src={`${base}${project.images[0]}`}
+                  src={`${base}images/${project.images[0]}.webp`}
                   alt={`${project.name}: detalle de la interfaz`}
                   loading="lazy"
                   decoding="async"
                   class={`w-full object-cover ${imageRadius}`}
-                  style="height: clamp(130px, 16vw, 230px);"
+                  style="height: clamp(110px, min(16vw, 22vh), 230px);"
                 />
                 <img
-                  src={`${base}${project.images[1]}`}
-                  alt={`${project.name}: versión móvil`}
+                  src={`${base}images/${project.images[1]}.webp`}
+                  alt={`${project.name}: vista en dispositivo`}
                   loading="lazy"
                   decoding="async"
                   class={`w-full object-cover ${imageRadius}`}
-                  style="height: clamp(160px, 22vw, 340px);"
+                  style="height: clamp(140px, min(22vw, 30vh), 340px);"
                 />
               </div>
               <div class="w-[60%]">
                 <img
-                  src={`${base}${project.images[2]}`}
-                  alt={project.alt}
+                  src={`${base}images/${project.images[2]}.webp`}
+                  alt={`${project.name}: ${project.category}`}
                   loading="lazy"
                   decoding="async"
                   class={`h-full w-full object-cover ${imageRadius}`}
