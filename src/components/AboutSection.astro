@@ -86,6 +86,14 @@ const stack = [
         class="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
         style="font-size: clamp(1rem, 2vw, 1.35rem);"
       />
+      <FadeIn
+        as="p"
+        delay={0.05}
+        y={20}
+        class="text-center text-xs font-light uppercase tracking-widest text-[#D7E2EA]/70 sm:text-sm"
+      >
+        Ingeniero de Sistemas · Universidad Simón Bolívar · 2021 — 2026
+      </FadeIn>
       <FadeIn as="ul" delay={0.1} y={20} class="flex max-w-[640px] flex-wrap justify-center gap-2" aria-label="Tecnologías">
         {
           stack.map((tech) => (
